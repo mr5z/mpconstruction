@@ -225,7 +225,7 @@
                 Text="Next"
                 TextColor="White"
                 TextTransform="None"
-                Command="{Binding Source={x:Reference Page}, Path=BindingContext.AddPhotoCommand}"
+                Command="{Binding Source={x:Reference Page}, Path=BindingContext.NextCommand}"
                 />
         </StackLayout>
     </ScrollView>

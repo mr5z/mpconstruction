@@ -7,6 +7,6 @@ namespace MPConstruction.Apis
     interface IImageApi
     {
         [Post("/api/images")]
-        Task<ImageResponse> UploadImage(string base64);
+        Task<ImageResponse> UploadImage([Body] string base64);
     }
 }

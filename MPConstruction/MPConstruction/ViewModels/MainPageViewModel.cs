@@ -1,4 +1,5 @@
 ﻿using MPConstruction.Apis;
+using MPConstruction.Exceptions;
 using MPConstruction.Models;
 using MPConstruction.Services;
 using Prism.Commands;
@@ -40,6 +41,8 @@ namespace MPConstruction.ViewModels
         {
             try
             {
+                Validate();
+
                 var tasks = new List<Task<ImageResponse>>();
                 foreach(var p in SelectedPhotos)
                 {
@@ -49,7 +52,11 @@ namespace MPConstruction.ViewModels
                 }
                 await Task.WhenAll(tasks);
             }
-            catch
+            catch (ValidationException)
+            {
+                // TODO do something else other than showing Toast
+            }
+            catch (Exception ex)
             {
                 toastService.Show("An error occurred. Please try again later.");
             }
@@ -109,6 +116,11 @@ namespace MPConstruction.ViewModels
             await stream.CopyToAsync(ms);
             var bytes = ms.ToArray();
             return Convert.ToBase64String(bytes);
+        }
+
+        private void Validate()
+        {
+            // TODO add property validations here
         }
     }
 }
