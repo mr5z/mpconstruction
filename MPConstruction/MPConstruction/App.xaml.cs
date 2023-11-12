@@ -1,28 +1,32 @@
-﻿using System;
+﻿using MPConstruction.ViewModels;
+using Prism.Ioc;
 using Xamarin.Forms;
-using Xamarin.Forms.Xaml;
 
 namespace MPConstruction
 {
-    public partial class App : Application
+    public partial class App
     {
         public App()
         {
+
+        }
+
+        protected override async void OnInitialized()
+        {
             InitializeComponent();
 
-            MainPage = new MainPage();
+            var result = await NavigationService.NavigateAsync("MainPage");
+
+            if (!result.Success)
+            {
+                System.Diagnostics.Debugger.Break();
+            }
         }
 
-        protected override void OnStart()
+        protected override void RegisterTypes(IContainerRegistry containerRegistry)
         {
+            containerRegistry.RegisterForNavigation<MainPage, MainPageViewModel>();
         }
 
-        protected override void OnSleep()
-        {
-        }
-
-        protected override void OnResume()
-        {
-        }
     }
 }

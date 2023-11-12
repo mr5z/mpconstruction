@@ -1,0 +1,233 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="MPConstruction.MainPage"
+    xmlns:views="clr-namespace:MPConstruction.Controls"
+    xmlns:vm="clr-namespace:MPConstruction.ViewModels"
+    xmlns:model="clr-namespace:MPConstruction.Models"
+    x:DataType="vm:MainPageViewModel"
+    x:Name="Page">
+
+    <ScrollView>
+        <StackLayout
+            VerticalOptions="Start"
+            Padding="10"
+            Spacing="30">
+            <views:CardView>
+                <StackLayout
+                    VerticalOptions="Start"
+                    HeightRequest="220">
+                    <Label
+                        VerticalTextAlignment="Center"
+                        FontAttributes="Bold"
+                        Text="Add Photos to site diary" />
+                    <BoxView
+                        HeightRequest="1"
+                        BackgroundColor="LightGray" />
+                    <CollectionView
+                        VerticalOptions="Start"
+                        HorizontalOptions="Start"
+                        HeightRequest="100"
+                        ItemsSource="{Binding SelectedPhotos}">
+                        <CollectionView.ItemsLayout>
+                            <GridItemsLayout Orientation="Vertical" Span="5" />
+                        </CollectionView.ItemsLayout>
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate>
+                                <Grid
+                                    x:DataType="model:Photo"
+                                    Margin="0"
+                                    ColumnSpacing="2"
+                                    Padding="10"
+                                    >
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="46" />
+                                    </Grid.RowDefinitions>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="46" />
+                                    </Grid.ColumnDefinitions>
+                                    <Image
+                                        Source="{Binding Source}" />
+                                    <Frame
+                                        VerticalOptions="Start"
+                                        HorizontalOptions="End"
+                                        Margin="0,-6,-6,0"
+                                        HeightRequest="15"
+                                        WidthRequest="15"
+                                        CornerRadius="7.5"
+                                        Padding="0"
+                                        BackgroundColor="Black">
+                                        <Label
+                                            VerticalOptions="Center"
+                                            HorizontalOptions="Center"
+                                            FontSize="7"
+                                            HorizontalTextAlignment="Center"
+                                            VerticalTextAlignment="Center"
+                                            FontAttributes="Bold"
+                                            TextColor="White"
+                                            Text="X">
+                                            <Label.GestureRecognizers>
+                                                <TapGestureRecognizer
+                                                    Command="{Binding Source={x:Reference Page}, Path=BindingContext.DeletePhotoCommand}"
+                                                    CommandParameter="{Binding .}" />
+                                            </Label.GestureRecognizers>
+                                        </Label>
+                                    </Frame>
+                                </Grid>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+                    <Button
+                        CornerRadius="4"
+                        BackgroundColor="#97d600"
+                        Text="Add a photo"
+                        TextColor="White"
+                        TextTransform="None"
+                        Command="{Binding Source={x:Reference Page}, Path=BindingContext.AddPhotoCommand}"
+                        />
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+                        <Label
+                            Grid.Column="0"
+                            VerticalOptions="Center"
+                            HorizontalOptions="Start"
+                            Text="Include in photo gallery" />
+                        <CheckBox
+                            Grid.Column="1"
+                            VerticalOptions="Center"
+                            HorizontalOptions="End"
+                            IsChecked="True" />
+                    </Grid>
+                </StackLayout>
+            </views:CardView>
+            <views:CardView>
+                <StackLayout
+                    VerticalOptions="Start"
+                    HeightRequest="90">
+                    <Label
+                        VerticalTextAlignment="Center"
+                        FontAttributes="Bold"
+                        Text="Comments" />
+                    <BoxView
+                        HeightRequest="1"
+                        BackgroundColor="LightGray" />
+                    <Editor
+                        VerticalOptions="End"
+                        PlaceholderColor="LightGray"
+                        Placeholder="Comments"
+                        FontSize="14" />
+                </StackLayout>
+            </views:CardView>
+            <views:CardView>
+                <StackLayout
+                    VerticalOptions="Start"
+                    HeightRequest="240"
+                    Spacing="10">
+                    <Label
+                        VerticalTextAlignment="Center"
+                        FontAttributes="Bold"
+                        Text="Details" />
+                    <BoxView
+                        HeightRequest="1"
+                        BackgroundColor="LightGray" />
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+                        <Label
+                            HorizontalOptions="End"
+                            VerticalTextAlignment="Center"
+                            Text="▼" />
+                        <DatePicker 
+                            FontSize="14"
+                            Format="yyyy-MM-dd" />
+                    </Grid>
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+                        <Label
+                            HorizontalOptions="End"
+                            VerticalTextAlignment="Center"
+                            Text="▼" />
+                        <Picker 
+                            FontSize="14"
+                            Title="Select Area" />
+                    </Grid>
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+                        <Label
+                            HorizontalOptions="End"
+                            VerticalTextAlignment="Center"
+                            Text="▼" />
+                        <Picker 
+                            FontSize="14"
+                            Title="Task Category" />
+                    </Grid>
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+                        <Label
+                            HorizontalOptions="End"
+                            VerticalTextAlignment="Center"
+                            Text="▼" />
+                        <Picker 
+                            FontSize="14"
+                            Title="Tags" />
+                    </Grid>
+                </StackLayout>
+            </views:CardView>
+            <views:CardView>
+                <StackLayout
+                    VerticalOptions="Start"
+                    HeightRequest="100"
+                    Spacing="10">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+                        <CheckBox
+                            VerticalOptions="Center"
+                            HorizontalOptions="End"
+                            IsChecked="True" />
+                        <Label
+                            VerticalTextAlignment="Center"
+                            FontAttributes="Bold"
+                            Text="Link to existing event?" />
+                    </Grid>
+                    <BoxView
+                        HeightRequest="1"
+                        BackgroundColor="LightGray" />
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+                        <Label
+                            HorizontalOptions="End"
+                            VerticalTextAlignment="Center"
+                            Text="▼" />
+                        <Picker
+                            FontSize="14"
+                            Title="Select an event" />
+                    </Grid>
+                </StackLayout>
+            </views:CardView>
+            <Button
+                CornerRadius="4"
+                BackgroundColor="#97d600"
+                Text="Next"
+                TextColor="White"
+                TextTransform="None"
+                Command="{Binding Source={x:Reference Page}, Path=BindingContext.AddPhotoCommand}"
+                />
+        </StackLayout>
+    </ScrollView>
+    
+</ContentPage>
