@@ -3,6 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 
 using Foundation;
+using MPConstruction.iOS.Services;
+using MPConstruction.Services;
+using Prism;
+using Prism.Ioc;
 using UIKit;
 
 namespace MPConstruction.iOS
@@ -23,9 +27,17 @@ namespace MPConstruction.iOS
         public override bool FinishedLaunching(UIApplication app, NSDictionary options)
         {
             global::Xamarin.Forms.Forms.Init();
-            LoadApplication(new App());
+            LoadApplication(new App(new Startup()));
 
             return base.FinishedLaunching(app, options);
+        }
+    }
+
+    class Startup : IPlatformInitializer
+    {
+        public void RegisterTypes(IContainerRegistry containerRegistry)
+        {
+            containerRegistry.Register<IToastService>(() => new ToastService());
         }
     }
 }

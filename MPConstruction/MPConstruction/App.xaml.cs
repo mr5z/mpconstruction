@@ -1,14 +1,25 @@
-﻿using MPConstruction.ViewModels;
+﻿using MPConstruction.Apis;
+using MPConstruction.ViewModels;
+using Prism;
 using Prism.Ioc;
+using Refit;
 using Xamarin.Forms;
 
 namespace MPConstruction
 {
     public partial class App
     {
-        public App()
+        class DummyStartup : IPlatformInitializer
         {
+            public void RegisterTypes(IContainerRegistry containerRegistry) { }
+        }
 
+        public App() : base(new DummyStartup())
+        {
+        }
+
+        public App(IPlatformInitializer platformInitializer) : base(platformInitializer)
+        {
         }
 
         protected override async void OnInitialized()
@@ -25,6 +36,8 @@ namespace MPConstruction
 
         protected override void RegisterTypes(IContainerRegistry containerRegistry)
         {
+            var imageService = RestService.For<IImageApi>("https://reqres.in");
+            containerRegistry.RegisterInstance(imageService);
             containerRegistry.RegisterForNavigation<MainPage, MainPageViewModel>();
         }
 
