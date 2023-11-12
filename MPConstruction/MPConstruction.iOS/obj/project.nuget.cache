@@ -1,0 +1,12 @@
+{
+  "version": 2,
+  "dgSpecHash": "ga0sv5Bmd/ugtNgECzIHtVGJX6LQRkZ4bzQjxPSbh+Oui5A6z2ARWNmpGivpVGGFvVU24GJX8U4l3VMqvq3Rcg==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\Mark\\source\\repos\\MPConstruction\\MPConstruction\\MPConstruction.iOS\\MPConstruction.iOS.csproj",
+  "expectedPackageFiles": [
+    "D:\\.nuget\\packages\\system.numerics.vectors\\4.5.0\\system.numerics.vectors.4.5.0.nupkg.sha512",
+    "D:\\.nuget\\packages\\xamarin.essentials\\1.7.0\\xamarin.essentials.1.7.0.nupkg.sha512",
+    "D:\\.nuget\\packages\\xamarin.forms\\5.0.0.2196\\xamarin.forms.5.0.0.2196.nupkg.sha512"
+  ],
+  "logs": []
+}
