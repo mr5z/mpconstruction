@@ -108,7 +108,7 @@ namespace MPConstruction.ViewModels
                 var id = SelectedPhotos.LastOrDefault()?.Id ?? 0;
                 return new Photo
                 {
-                    Id = id,
+                    Id = id + 1,
                     Source = photo.FullPath,
                     Ref = photo
                 };
