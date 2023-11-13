@@ -100,7 +100,7 @@
                             Grid.Column="1"
                             VerticalOptions="Center"
                             HorizontalOptions="End"
-                            IsChecked="True" />
+                            IsChecked="{Binding IncludePhotoInGallery}" />
                     </Grid>
                 </StackLayout>
             </views:CardView>
@@ -119,7 +119,8 @@
                         VerticalOptions="End"
                         PlaceholderColor="LightGray"
                         Placeholder="Comments"
-                        FontSize="14" />
+                        FontSize="14"
+                        Text="{Binding Comments}" />
                 </StackLayout>
             </views:CardView>
             <views:CardView>
@@ -144,7 +145,8 @@
                             Text="▼" />
                         <DatePicker 
                             FontSize="14"
-                            Format="yyyy-MM-dd" />
+                            Format="yyyy-MM-dd"
+                            Date="{Binding DateTime}" />
                     </Grid>
                     <Grid>
                         <Grid.RowDefinitions>
@@ -156,7 +158,8 @@
                             Text="▼" />
                         <Picker 
                             FontSize="14"
-                            Title="Select Area" />
+                            Title="Select Area"
+                            SelectedItem="{Binding SelectedArea}" />
                     </Grid>
                     <Grid>
                         <Grid.RowDefinitions>
@@ -168,7 +171,8 @@
                             Text="▼" />
                         <Picker 
                             FontSize="14"
-                            Title="Task Category" />
+                            Title="Task Category"
+                            SelectedItem="{Binding TaskCategory}" />
                     </Grid>
                     <Grid>
                         <Grid.RowDefinitions>
@@ -180,7 +184,8 @@
                             Text="▼" />
                         <Picker 
                             FontSize="14"
-                            Title="Tags" />
+                            Title="Tags"
+                            SelectedItem="{Binding Tags}" />
                     </Grid>
                 </StackLayout>
             </views:CardView>
@@ -204,7 +209,7 @@
                             Grid.Column="1"
                             VerticalOptions="Center"
                             HorizontalOptions="End"
-                            IsChecked="True" />
+                            IsChecked="{Binding LinkToExistingEvent}" />
                     </Grid>
                     <BoxView
                         HeightRequest="1"
@@ -219,7 +224,8 @@
                             Text="▼" />
                         <Picker
                             FontSize="14"
-                            Title="Select an event" />
+                            Title="Select an event"
+                            SelectedItem="{Binding SelectedEvent}" />
                     </Grid>
                 </StackLayout>
             </views:CardView>

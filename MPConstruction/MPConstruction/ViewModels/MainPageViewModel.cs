@@ -18,23 +18,42 @@ namespace MPConstruction.ViewModels
         private readonly IImageApi imageApi;
         private readonly IToastService toastService;
 
-        public ObservableCollection<Photo> SelectedPhotos { get; set; }
-
         public DelegateCommand AddPhotoCommand { get; set; }
 
         public DelegateCommand<Photo> DeletePhotoCommand { get; set; }
 
         public DelegateCommand NextCommand { get; set; }
 
+        public ObservableCollection<Photo> SelectedPhotos { get; set; }
+
+        public bool IncludePhotoInGallery { get; set; }
+
+        public string Comments { get; set; }
+
+        public DateTime DateTime { get; set; }
+
+        public string SelectedArea { get; set; }
+
+        public string TaskCategory { get; set; }
+
+        public string Tags { get; set; }
+
+        public bool LinkToExistingEvent { get; set; }
+
+        public string SelectedEvent { get; set; }
+
         public MainPageViewModel(IImageApi imageApi, IToastService toastService) 
         {
             this.imageApi = imageApi;
             this.toastService = toastService;
 
-            SelectedPhotos = new ObservableCollection<Photo>();
             AddPhotoCommand = new DelegateCommand(AddPhoto);
             DeletePhotoCommand = new DelegateCommand<Photo>(DeletePhoto);
             NextCommand = new DelegateCommand(Next);
+            SelectedPhotos = new ObservableCollection<Photo>();
+            IncludePhotoInGallery = true;
+            DateTime = DateTime.Now;
+            LinkToExistingEvent = true;
         }
 
         private async void Next()
