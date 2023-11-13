@@ -144,6 +144,8 @@ namespace MPConstruction.ViewModels
         private void Validate()
         {
             // TODO add property validations here
+            if (!SelectedPhotos.Any())
+                throw new ValidationException();
         }
     }
 }
