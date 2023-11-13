@@ -16,6 +16,7 @@ namespace MPConstruction.ViewModels
     internal class MainPageViewModel
     {
         private readonly IImageApi imageApi;
+        private readonly IReportApi reportApi;
         private readonly IToastService toastService;
 
         public DelegateCommand AddPhotoCommand { get; set; }
@@ -42,9 +43,13 @@ namespace MPConstruction.ViewModels
 
         public string SelectedEvent { get; set; }
 
-        public MainPageViewModel(IImageApi imageApi, IToastService toastService) 
+        public MainPageViewModel(
+            IImageApi imageApi,
+            IReportApi reportApi,
+            IToastService toastService) 
         {
             this.imageApi = imageApi;
+            this.reportApi = reportApi;
             this.toastService = toastService;
 
             AddPhotoCommand = new DelegateCommand(AddPhoto);
@@ -61,17 +66,8 @@ namespace MPConstruction.ViewModels
             try
             {
                 Validate();
-
-                var tasks = new List<Task<ImageResponse>>();
-                foreach(var p in SelectedPhotos)
-                {
-                    var b64 = await ToBase64(p);
-                    // TODO the base64 encoded image is too large for the API to handle or wouldn't accept if it's in the request body
-                    // For the sake of this demo, I discarded its value and replaced with "<placeholder>" instead
-                    var task = imageApi.UploadImage("<placeholder>");
-                    tasks.Add(task);
-                }
-                await Task.WhenAll(tasks);
+                await UploadImages();
+                await SendReport();
                 toastService.Show("Uploaded successfully");
                 ResetPage();
             }
@@ -83,6 +79,34 @@ namespace MPConstruction.ViewModels
             {
                 toastService.Show("An error occurred. Please try again later.");
             }
+        }
+
+        private async Task UploadImages()
+        {
+            var tasks = new List<Task<ImageResponse>>();
+            foreach (var p in SelectedPhotos)
+            {
+                var b64 = await ToBase64(p);
+                // TODO the base64 encoded image is too large for the API to handle or wouldn't accept if it's in the request body
+                // For the sake of this demo, I discarded its value and replaced with "<placeholder>" instead
+                var task = imageApi.UploadImage("<placeholder>");
+                tasks.Add(task);
+            }
+            await Task.WhenAll(tasks);
+        }
+
+        private Task SendReport()
+        {
+            return reportApi.SendReport(new Report
+            {
+                Comment = Comments,
+                DateTime = DateTime,
+                LinkToExistingEvent = LinkToExistingEvent,
+                SelectedArea = SelectedArea,
+                SelectedEvent = SelectedEvent,
+                Tags = Tags,
+                TaskCategory = TaskCategory
+            });
         }
 
         private void ResetPage()
