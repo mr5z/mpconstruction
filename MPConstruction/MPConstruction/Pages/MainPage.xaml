@@ -190,17 +190,21 @@
                     HeightRequest="100"
                     Spacing="10">
                     <Grid>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto" />
-                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+                        <Label
+                            Grid.Column="0"
+                            VerticalOptions="Center"
+                            HorizontalOptions="Start"
+                            FontAttributes="Bold"
+                            Text="Link to existing event?" />
                         <CheckBox
+                            Grid.Column="1"
                             VerticalOptions="Center"
                             HorizontalOptions="End"
                             IsChecked="True" />
-                        <Label
-                            VerticalTextAlignment="Center"
-                            FontAttributes="Bold"
-                            Text="Link to existing event?" />
                     </Grid>
                     <BoxView
                         HeightRequest="1"
