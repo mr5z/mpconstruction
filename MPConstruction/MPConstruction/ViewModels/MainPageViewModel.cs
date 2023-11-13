@@ -66,16 +66,20 @@ namespace MPConstruction.ViewModels
                 foreach(var p in SelectedPhotos)
                 {
                     var b64 = await ToBase64(p);
-                    var task = imageApi.UploadImage(b64);
+                    // TODO the base64 encoded image is too large for the API to handle or wouldn't accept if it's in the request body
+                    // For the sake of this demo, I discarded its value and replaced with "<placeholder>" instead
+                    var task = imageApi.UploadImage("<placeholder>");
                     tasks.Add(task);
                 }
                 await Task.WhenAll(tasks);
+                toastService.Show("Uploaded successfully");
+                SelectedPhotos.Clear();
             }
             catch (ValidationException)
             {
                 // TODO do something else other than showing Toast
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 toastService.Show("An error occurred. Please try again later.");
             }
