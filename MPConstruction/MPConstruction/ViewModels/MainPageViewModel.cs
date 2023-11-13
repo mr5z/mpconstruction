@@ -73,7 +73,7 @@ namespace MPConstruction.ViewModels
                 }
                 await Task.WhenAll(tasks);
                 toastService.Show("Uploaded successfully");
-                SelectedPhotos.Clear();
+                ResetPage();
             }
             catch (ValidationException)
             {
@@ -83,6 +83,12 @@ namespace MPConstruction.ViewModels
             {
                 toastService.Show("An error occurred. Please try again later.");
             }
+        }
+
+        private void ResetPage()
+        {
+            SelectedPhotos.Clear();
+            // TODO reset every properties to their default values
         }
 
         private async void AddPhoto()
@@ -143,9 +149,9 @@ namespace MPConstruction.ViewModels
 
         private void Validate()
         {
-            // TODO add property validations here
             if (!SelectedPhotos.Any())
                 throw new ValidationException();
+            // TODO add more property validations here
         }
     }
 }
